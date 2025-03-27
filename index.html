@@ -2,6 +2,7 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
+    <base href="/Claude-MediaArt/" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>超すごいメディアアート展 - インタラクティブ体験型メディアアート</title>
@@ -23,8 +24,18 @@
     <meta name="twitter:image" content="https://tsubokulab.github.io/Claude-MediaArt/images/ogp.jpg" />
     <!-- GitHub PagesでのSPAルーティングサポート -->
     <script type="text/javascript">
-      // GitHub PagesでのSPAリダイレクト処理
+      // 末尾スラッシュの追加
       (function() {
+        var location = window.location;
+        var pathname = location.pathname;
+        var isGitHubPages = location.hostname === 'tsubokulab.github.io';
+        
+        // GitHub Pagesで末尾にスラッシュがない場合は追加する
+        if (isGitHubPages && pathname.indexOf('/Claude-MediaArt') === 0 && pathname !== '/Claude-MediaArt/') {
+          // クエリパラメータやハッシュを保持してリダイレクト
+          window.location.replace(location.protocol + '//' + location.host + pathname + '/' + location.search + location.hash);
+        }
+        
         // リダイレクト元からのリクエストか確認
         if (window.location.search.indexOf('?/') !== -1) {
           var redirectParts = window.location.search.substring(2).split('&');
